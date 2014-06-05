@@ -409,6 +409,13 @@ var listen = function () {
             }
         });
 
+        socket.on('movePublisher', function (publisher_id, callback) {
+
+            socket.room.controller.movePublisher(publisher_id, function (m) {
+
+            });
+        });
+
         //Gets 'publish' messages on the socket in order to add new stream to the room.
         socket.on('publish', function (options, sdp, callback) {
             var id, st;

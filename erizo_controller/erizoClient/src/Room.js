@@ -301,6 +301,15 @@ Erizo.Room = function (spec) {
         that.dispatchEvent(disconnectEvt);
     };
 
+    that.movePublisher = function(id) {
+
+        sendSDPSocket('movePublisher', id, function () {
+            
+            
+        });
+    };
+
+
     // It publishes the stream provided as argument. Once it is added it throws a
     // StreamEvent("stream-added").
     that.publish = function (stream, options, callback, callbackError) {

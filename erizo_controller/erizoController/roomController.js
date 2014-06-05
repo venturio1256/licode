@@ -129,16 +129,53 @@ exports.RoomController = function (spec) {
         }
     };
 
+    var context = {};
+
+    that.movePublisher = function (publisher_id, callback) {
+
+        if (publishers[publisher_id] !== undefined) {
+
+            log.info("Moving publisher peer_id ", publisher_id);
+            log.info("Getting srtp credentials");
+
+            var args = [publisher_id];
+            rpc.callRpc(getErizoQueue(publisher_id), "getSrtpSession", args, {callback: function (srtp_session) {
+
+                log.info("Received credentials ", srtp_session);
+
+                var my_context = context[publisher_id];
+                my_context.srtp_session = srtp_session;
+
+                log.info('My context ', my_context);
+
+
+                createErizoJS(publisher_id, function(erizo_id) {
+                    log.info("Erizo created");
+
+                    var args = [publisher_id, my_context];
+                    rpc.callRpc(getErizoQueue(publisher_id), "movePublisher", args, {callback: callback});
+
+                   // Track publisher locally
+                   // publishers[publisher_id] = publisher_id;
+                   // subscribers[publisher_id] = [];
+                });
+
+            }});
+        } 
+    };
+
     that.processSignaling = function (streamId, peerId, msg) {
         log.info("Sending signaling mess to erizoJS of st ", streamId, ' of peer ', peerId);
         if (publishers[streamId] !== undefined) {
 
-            log.info("Sending signaling mess to erizoJS of st ", streamId, ' of peer ', peerId);
-
+            if (msg.type === 'offer') {
+                context[streamId].sdp = msg.sdp;
+            } else if (msg.type === 'candidate') {
+                context[streamId].candidates.push(msg.candidate);               
+            }
+            
             var args = [streamId, peerId, msg];
-
             rpc.callRpc(getErizoQueue(publishers[streamId]), "processSignaling", args, {});
-
         }
     };
 
@@ -152,6 +189,8 @@ exports.RoomController = function (spec) {
         if (publishers[publisher_id] === undefined) {
 
             log.info("Adding publisher peer_id ", publisher_id);
+
+            context[publisher_id] = {sdp: '', candidates: []};
 
             // We create a new ErizoJS with the publisher_id.
             createErizoJS(publisher_id, function(erizo_id) {
