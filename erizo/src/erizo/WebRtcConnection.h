@@ -126,6 +126,10 @@ public:
 
     void onCandidate(const std::string& sdp, Transport *transport);
 
+    std::string getSrtpSession();
+
+    void setSrtpSession(std::string keys);
+
 private:
   static const int STATS_INTERVAL = 5000;
     SdpInfo remoteSdp_;

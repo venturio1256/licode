@@ -85,6 +85,9 @@ DtlsTransport::DtlsTransport(MediaType med, const std::string &transport_name, b
   readyRtcp = false;
   running_ = false;
 
+  clientKey_ = "";
+  serverKey_ = "";
+
   dtlsRtp.reset(new DtlsSocketContext());
 
   // TODO the ownership of classes here is....really awkward. Basically, the DtlsFactory created here ends up being owned the the created client
@@ -262,8 +265,26 @@ void DtlsTransport::writeDtls(DtlsSocketContext *ctx, const unsigned char* data,
   nice_->sendData(comp, data, len);
 }
 
+void DtlsTransport::setSrtpSession(std::string clientKey, std::string serverKey) {
+  boost::mutex::scoped_lock lock(sessionMutex_);
+  clientKey_ = clientKey;
+  serverKey_ = serverKey;
+  ELOG_DEBUG("%s - Setting RTP srtp params", transport_name.c_str());
+  srtp_.reset(new SrtpChannel());
+  if (srtp_->setRtpParams((char*) clientKey.c_str(), (char*) serverKey.c_str())) {
+    readyRtp = true;
+  } else {
+    updateTransportState(TRANSPORT_FAILED);
+  }
+  if (dtlsRtcp == NULL) {
+    readyRtcp = true;
+  }
+}
+
 void DtlsTransport::onHandshakeCompleted(DtlsSocketContext *ctx, std::string clientKey,std::string serverKey, std::string srtp_profile) {
   boost::mutex::scoped_lock lock(sessionMutex_);
+  clientKey_ = clientKey;
+  serverKey_ = serverKey;
   if (ctx == dtlsRtp.get()) {
     ELOG_DEBUG("%s - Setting RTP srtp params", transport_name.c_str());
     srtp_.reset(new SrtpChannel());
@@ -311,7 +332,15 @@ void DtlsTransport::updateIceState(IceState state, NiceConnection *conn) {
     ELOG_DEBUG("%s - Nice ready", transport_name.c_str());
     if (!dtlsRtp->started || rtpResender->getStatus() < 0) {
       ELOG_DEBUG("%s - DTLSRTP Start", transport_name.c_str());
-      dtlsRtp->start();
+      if (clientKey_ == "") {
+        dtlsRtp->start();
+      } else {
+        if (readyRtp && readyRtcp) {
+          ELOG_DEBUG("%s - Ready!!!", transport_name.c_str());
+          updateTransportState(TRANSPORT_READY);
+        }
+      }
+      
     }
     if (dtlsRtcp != NULL && (!dtlsRtcp->started || rtcpResender->getStatus() < 0)) {
       ELOG_DEBUG("%s - DTLSRTCP Start", transport_name.c_str());

@@ -27,6 +27,8 @@ void WebRtcConnection::Init(Handle<Object> target) {
   tpl->PrototypeTemplate()->Set(String::NewSymbol("setVideoReceiver"), FunctionTemplate::New(setVideoReceiver)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("getCurrentState"), FunctionTemplate::New(getCurrentState)->GetFunction());
   tpl->PrototypeTemplate()->Set(String::NewSymbol("getStats"), FunctionTemplate::New(getStats)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("setSrtpSession"), FunctionTemplate::New(setSrtpSession)->GetFunction());
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("getSrtpSession"), FunctionTemplate::New(getSrtpSession)->GetFunction());
 
   Persistent<Function> constructor = Persistent<Function>::New(tpl->GetFunction());
   target->Set(String::NewSymbol("WebRtcConnection"), constructor);
@@ -182,6 +184,28 @@ Handle<Value> WebRtcConnection::getStats(const v8::Arguments& args){
 
   return scope.Close(Null());
 
+}
+
+Handle<Value> WebRtcConnection::getSrtpSession(const v8::Arguments& args){
+  HandleScope scope;
+
+  WebRtcConnection* obj = ObjectWrap::Unwrap<WebRtcConnection>(args.This());
+  erizo::WebRtcConnection *me = obj->me;
+
+  return scope.Close(String::NewSymbol(me->getSrtpSession().c_str()));
+}
+
+Handle<Value> WebRtcConnection::setSrtpSession(const v8::Arguments& args){
+  HandleScope scope;
+
+  String::Utf8Value param(args[0]->ToString());
+  std::string srtpSession = std::string(*param);
+
+  WebRtcConnection* obj = ObjectWrap::Unwrap<WebRtcConnection>(args.This());
+  erizo::WebRtcConnection *me = obj->me;
+  me->setSrtpSession(srtpSession);
+
+  return scope.Close(Null());
 }
 
 void WebRtcConnection::notifyEvent(erizo::WebRTCEvent event, const std::string& message) {

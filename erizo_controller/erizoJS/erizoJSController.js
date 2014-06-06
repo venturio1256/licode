@@ -53,7 +53,7 @@ exports.ErizoJSController = function (spec) {
     /*
      * Given a WebRtcConnection waits for the state CANDIDATES_GATHERED for set remote SDP. 
      */
-    initWebRtcConnection = function (wrtc, callback, id_pub, id_sub) {
+    initWebRtcConnection = function (wrtc, callback, id_pub, id_sub, context) {
 
         if (GLOBAL.config.erizoController.sendStats) {
             wrtc.getStats(function (newStats){
@@ -77,18 +77,38 @@ exports.ErizoJSController = function (spec) {
 
           if (newStatus == CONN_INITIAL) {
             callback('callback', {type: 'started'});
-
+            
           } else if (newStatus == CONN_SDP) {
             log.debug('Sending SDP', mess);
-            callback('callback', {type: 'answer', sdp: mess});
+            if (context === undefined) {
+                callback('callback', {type: 'answer', sdp: mess});
+            }
 
           } else if (newStatus == CONN_CANDIDATE) {
             callback('callback', {type: 'candidate', candidate: mess});
+            if (context !== undefined && context.candidates_sent === false) {
+                log.debug("Setting remote candidates", context.candidates);
+                for (var cand_idx in context.candidates) {
+                    var candidate = context.candidates[cand_idx];
+                    log.debug('Setting candidate ', cand_idx, candidate);
+                    wrtc.addRemoteCandidate(candidate.sdpMid, candidate.candidate);
+                }
+                log.debug("Set");
+                context.candidates_sent = true;
+            }
           } else if (newStatus == CONN_STARTED) {
           }
 
         });
         log.info("initializing");
+
+        if (context !== undefined) {
+            log.debug("Setting context");
+            wrtc.setRemoteSdp(context.sdp);
+            wrtc.setSrtpSession(context.srtp_session);
+            log.debug("Set");
+            context.candidates_sent = false;
+        }
 
         callback('callback', {type: 'initializing'});
 
@@ -135,6 +155,37 @@ exports.ErizoJSController = function (spec) {
         answer += ' \"answererSessionId\":' + answererSessionId + ',\n \"seq\" : 1\n}\n';
 
         return answer;
+    };
+
+    that.getSrtpSession = function(streamId, peerId, callback) {
+        log.debug("Getting SRTP Session from ", streamId, peerId);
+        var session = undefined;
+        if (peerId === null) {
+            if (publishers[streamId] !== undefined) {
+                log.debug("Obtaining from publisher");
+                session = publishers[streamId].wrtc.getSrtpSession();
+            }    
+        } else {
+            if (subscribers[streamId][peerId]) {
+                log.debug("Obtaining from subscriber");
+                session = publishers[streamId].wrtc.getSrtpSession();
+            }
+        }
+        log.debug("Session", session);
+        callback("callback", session);
+    };
+
+    that.setSrtpSession = function(srtpSession, streamId, peerId) {
+        if (peerId === undefined) {
+            if (publishers[streamId] !== undefined) {
+                return publishers[streamId].wrtc.setSrtpSession(srtpSession);
+            }    
+        } else {
+            if (subscribers[streamId][peerId]) {
+                subscribers[streamId][peerId].setSrtpSession(srtpSession);
+            }
+        }
+        return;
     };
 
     that.addExternalInput = function (from, url, callback) {
@@ -202,6 +253,37 @@ exports.ErizoJSController = function (spec) {
                 } 
             }
             
+        }
+    };
+
+    /*
+     * Adds a publisher to the room. This creates a new OneToManyProcessor
+     * and a new WebRtcConnection. This WebRtcConnection will be the publisher
+     * of the OneToManyProcessor.
+     */
+    that.movePublisher = function (from, context, callback) {
+
+        if (publishers[from] === undefined) {
+
+            log.info("Adding publisher peer_id ", from);
+
+            var muxer = new addon.OneToManyProcessor(),
+                wrtc = new addon.WebRtcConnection(true, true, GLOBAL.config.erizo.stunserver, GLOBAL.config.erizo.stunport, GLOBAL.config.erizo.minport, GLOBAL.config.erizo.maxport);
+
+            publishers[from] = {muxer: muxer, wrtc: wrtc, context: context};
+            subscribers[from] = {};
+
+            wrtc.setAudioReceiver(muxer);
+            wrtc.setVideoReceiver(muxer);
+            muxer.setPublisher(wrtc);
+
+            initWebRtcConnection(wrtc, callback, from, undefined, context);
+
+            //log.info('Publishers: ', publishers);
+            //log.info('Subscribers: ', subscribers);
+
+        } else {
+            log.info("Publisher already set for", from);
         }
     };
 

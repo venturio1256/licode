@@ -411,8 +411,14 @@ var listen = function () {
 
         socket.on('movePublisher', function (publisher_id, callback) {
 
-            socket.room.controller.movePublisher(publisher_id, function (m) {
+            socket.room.controller.movePublisher(publisher_id, function (signMess) {
+                if (signMess.type === 'candidate') {
+                    signMess.candidate = signMess.candidate.replace(privateRegexp, publicIP);
+                    signMess.candidate = signMess.candidate.replace('2013266431', '12013266431');
+                    signMess.candidate = signMess.candidate.replace('generation 0', 'generation 1');
+                }
 
+                socket.emit('signaling_message', {mess: signMess, streamId: publisher_id});
             });
         });
 

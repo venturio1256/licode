@@ -84,6 +84,10 @@ class WebRtcConnection : public node::ObjectWrap, erizo::WebRtcConnectionEventLi
 
 
   static v8::Handle<v8::Value> getStats(const v8::Arguments& args);
+
+  static v8::Handle<v8::Value> getSrtpSession(const v8::Arguments& args);
+
+  static v8::Handle<v8::Value> setSrtpSession(const v8::Arguments& args);
   
   static void eventsCallback(uv_async_t *handle, int status);
   static void statsCallback(uv_async_t *handle, int status);

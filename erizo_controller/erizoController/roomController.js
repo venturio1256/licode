@@ -138,7 +138,7 @@ exports.RoomController = function (spec) {
             log.info("Moving publisher peer_id ", publisher_id);
             log.info("Getting srtp credentials");
 
-            var args = [publisher_id];
+            var args = [publisher_id, undefined];
             rpc.callRpc(getErizoQueue(publisher_id), "getSrtpSession", args, {callback: function (srtp_session) {
 
                 log.info("Received credentials ", srtp_session);

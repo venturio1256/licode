@@ -142,7 +142,8 @@ Erizo.ChromeJSEPStack = function (spec) {
             console.log("Set remote and local description", msg.sdp);
 
             //msg.sdp = setMaxBW(msg.sdp);
-
+            that.localDesc = localDesc;
+            that.remoteDesc = new RTCSessionDescription(msg);
             that.peerConnection.setLocalDescription(localDesc);
             that.peerConnection.setRemoteDescription(new RTCSessionDescription(msg), function() {
                 spec.remoteDescriptionSet = true;

@@ -8,6 +8,7 @@
 #include "DtlsTransport.h"
 #include "SdpInfo.h"
 #include "rtp/RtpHeaders.h"
+#include "StringUtil.h"
 
 namespace erizo {
   DEFINE_LOGGER(WebRtcConnection, "WebRtcConnection");
@@ -76,6 +77,21 @@ namespace erizo {
 
   bool WebRtcConnection::init() {
     return true;
+  }
+
+  std::string WebRtcConnection::getSrtpSession() {
+    std::string clientKey = "";
+    if (videoTransport_) {
+       return videoTransport_->getClientKey() + ":" + videoTransport_->getServerKey();
+    }
+    return "";
+  }
+
+  void WebRtcConnection::setSrtpSession(std::string keys) {
+    std::vector<std::string> parts = stringutil::splitOneOf(keys, ":", 2);
+    if (videoTransport_) {
+      videoTransport_->setSrtpSession(parts[0], parts[1]);
+    }
   }
   
   bool WebRtcConnection::setRemoteSdp(const std::string &sdp) {

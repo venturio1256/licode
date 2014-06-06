@@ -37,6 +37,7 @@ namespace erizo {
       virtual void onCandidate(const CandidateInfo &candidate, NiceConnection *conn)=0;
       virtual void write(char* data, int len) = 0;
       virtual void processLocalSdp(SdpInfo *localSdp_) = 0;
+      virtual void setSrtpSession(std::string clientKey, std::string serverKey) = 0;
       void setTransportListener(TransportListener * listener) {
         transpListener_ = listener;
       }
@@ -61,6 +62,13 @@ namespace erizo {
       bool setRemoteCandidates(std::vector<CandidateInfo> &candidates) {
         return nice_->setRemoteCandidates(candidates);
       }
+
+      std::string getClientKey() {
+        return clientKey_;
+      }
+      std::string getServerKey() {
+        return serverKey_;
+      }
       bool rtcp_mux_;
     private:
       TransportListener *transpListener_;
@@ -69,7 +77,11 @@ namespace erizo {
 
       int stunPort_, minPort_, maxPort_;
 
+    protected:
       std::string stunServer_;
+
+      std::string clientKey_;
+      std::string serverKey_;
   };
 }
 #endif
