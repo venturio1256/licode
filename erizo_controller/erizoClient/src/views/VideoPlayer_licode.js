@@ -4,8 +4,7 @@
  * Ex.: var player = VideoPlayer({id: id, stream: stream, elementID: elementID});
  * A VideoPlayer is also a View component.
  */
-// relaL0.95 : Release aL 0.95  : Christian Thomas for Astronomy Live Project 
- var Erizo = Erizo || {};
+var Erizo = Erizo || {};
 Erizo.VideoPlayer = function (spec) {
     "use strict";
 
@@ -24,13 +23,13 @@ Erizo.VideoPlayer = function (spec) {
     // DOM element in which the VideoPlayer will be appended
     that.elementID = spec.elementID;
 
-    // Private functions : relaL0.95
+    // Private functions
     onmouseover = function (evt) {
-// relaL0.95        that.bar.display();
+        that.bar.display();
     };
 
     onmouseout = function (evt) {
-// relaL0.95        that.bar.hide();
+        that.bar.hide();
     };
 
     // Public functions
@@ -118,8 +117,6 @@ Erizo.VideoPlayer = function (spec) {
     that.video.setAttribute('id', 'stream' + that.id);
     that.video.setAttribute('style', 'width: 100%; height: 100%; position: absolute');
     that.video.setAttribute('autoplay', 'autoplay');
-// relaL0.95
-	that.video.setAttribute('controls', 'true');
 
     if(spec.stream.local) 
         that.video.volume = 0;
@@ -145,7 +142,8 @@ Erizo.VideoPlayer = function (spec) {
     that.resize();
 
     // Bottom Bar
-// relaL0.95    that.bar = new Erizo.Bar({elementID: 'player_' + that.id, id: that.id, stream: spec.stream, media: that.video, options: spec.options});
+    that.bar = new Erizo.Bar({elementID: 'player_' + that.id, id: that.id, stream: spec.stream, media: that.video, options: spec.options});
+
     that.div.onmouseover = onmouseover;
     that.div.onmouseout = onmouseout;
 
