@@ -43,7 +43,7 @@ N.API.getRooms(function(roomlist) {
     var rooms = JSON.parse(roomlist);
     console.log(rooms.length);
     if (rooms.length === 0) {
-        N.API.createRoom('myRoom', function(roomID) {
+        N.API.createRoom('channel1', function(roomID) {
             myRoom = roomID._id;
             console.log('Created room ', myRoom);
         });
