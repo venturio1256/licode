@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Astronomy Live Basic Broadcast</title>
+    <script type="text/javascript" src="erizo.js"></script>
+    <script type="text/javascript" src="broadcaster.js"></script>
+  </head>
+
+  <body>
+	<main>
+		<header>
+		<h1>Astronomy Live Basic Broadcasting V 0.9</h1>
+		<h3>Stream your Universe</h3>
+		</header>
+		
+		<div id="myVideo" style="width:320px; height: 240px;"></div>
+		<button id="broadcastButton" onclick="startBroadcasting()">Toggle Broadcasting</button>
+	</main>
+	
+	<aside>
+		<h3>Events</h3>
+		<h5>Upcoming events 3rd quarter 2014</h5>
+		<div id="events"></div>
+		<button id="eventsButton" onclick="roomList()">Update list</button>
+	</aside>
+
+  </body>
+</html>

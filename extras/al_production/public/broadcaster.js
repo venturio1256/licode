@@ -1,5 +1,5 @@
 var serverUrl = "/";
-var localStream, room, recording;
+var localStream, room, broadcasting;
 
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -8,18 +8,47 @@ function getParameterByName(name) {
   return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function startRecording (){
+function startBroadcasting (){
   if (room!=undefined){
-    if (!recording){
-      room.startRecording(localStream);
-      recording = true;
+    if (!broadcasting){
+//      room.startBroadcasting(localStream);
+// TODO: Publish / Unpublish stream in the room
+	  localStream.play("myVideo",{speaker: false});
+	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
+//      room.startRecording(localStream);
+      broadcasting = true;
     }else{
-      room.stopRecording(localStream);
-      recording = false;
+//      room.stopBroadcasting(localStream);
+//      room.stopRecording(localStream);
+	  localStream.stop();
+	  document.getElementById("broadcastButton").innerHTML = "Resume Broadcasting";
+      broadcasting = false;
     }
   }
 }
 
+
+function roomList() {
+
+    var req = new XMLHttpRequest();
+    var url = serverUrl + 'getRooms/';
+//    var body = {username: userName, role: role};
+
+    req.onreadystatechange = function () {
+      if (req.readyState === 4) {
+        var rooms = JSON.parse(req.responseText);
+		console.log(req.responseText);
+		for (i=0; i < rooms.length; i++) {
+			document.getElementById("events").innerHTML += (i+1) + " - " + rooms[i].name + "<br>";
+		}
+      }
+    };
+
+    req.open('GET', url, true);
+//    req.setRequestHeader('Content-Type', 'application/json');
+    req.send();
+  };
+  
 window.onload = function () {
   recording = false;
   var screen = getParameterByName("screen");
@@ -51,15 +80,17 @@ window.onload = function () {
       var subscribeToStreams = function (streams) {
         for (var index in streams) {
           var stream = streams[index];
+		  console.log
           if (localStream.getID() !== stream.getID()) {
-            room.subscribe(stream);
+			console.log('Stream List ' + stream.getID());
+//            room.subscribe(stream);
           }
         }
       };
 
       room.addEventListener("room-connected", function (roomEvent) {
 
-        room.publish(localStream, {maxVideoBW: 300});
+        room.publish(localStream, {maxVideoBW: 600});
         subscribeToStreams(roomEvent.streams);
       });
 
@@ -70,7 +101,7 @@ window.onload = function () {
         div.setAttribute("id", "test" + stream.getID());
 
         document.body.appendChild(div);
-        stream.show("test" + stream.getID());
+        stream.play("test" + stream.getID());
 
       });
 
@@ -91,7 +122,10 @@ window.onload = function () {
 
       room.connect();
 
-      localStream.show("myVideo");
+      localStream.play("myVideo",{speaker: false});
+	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
+	  broadcasting = true;
+
 
     });
     localStream.init();
