@@ -536,9 +536,11 @@ var listen = function () {
             var url;
 
             if (GLOBAL.config.erizoController.recording_path) {
-                url = GLOBAL.config.erizoController.recording_path + recordingId + '.mkv';
+//                url = GLOBAL.config.erizoController.recording_path + recordingId + '.mkv';
+                url = GLOBAL.config.erizoController.recording_path + 'livestream';
             } else {
-                url = '/tmp/' + recordingId + '.mkv';
+//                url = '/tmp/' + recordingId + '.mkv';
+                url = '/tmp/' + 'livestream';
             }
 
             log.info("erizoController.js: Starting recorder streamID " + streamId + "url ", url);
