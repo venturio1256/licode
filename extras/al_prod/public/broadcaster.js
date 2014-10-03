@@ -15,7 +15,7 @@ function startBroadcasting (){
 // TODO: Publish / Unpublish stream in the room
 	  localStream.play("myVideo",{speaker: false});
 	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
-      if (!recordding){
+      if (!recording){
 		room.startRecording(localStream, function(id) {
 			recording = true;
 			recordingId = id;
