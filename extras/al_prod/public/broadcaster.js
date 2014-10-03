@@ -1,5 +1,5 @@
 var serverUrl = "/";
-var localStream, room, broadcasting;
+var localStream, room, broadcasting,recording,recordingId;
 
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -15,11 +15,15 @@ function startBroadcasting (){
 // TODO: Publish / Unpublish stream in the room
 	  localStream.play("myVideo",{speaker: false});
 	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
-      room.startRecording(localStream);
+      room.startRecording(localStream, function(id) {
+        recording = true;
+        recordingId = id;
+      });
       broadcasting = true;
     }else{
 //      room.stopBroadcasting(localStream);
-      room.stopRecording(localStream);
+      room.stopRecording(recordingId);
+	  recording = false;
 	  localStream.stop();
 	  document.getElementById("broadcastButton").innerHTML = "Resume Broadcasting";
       broadcasting = false;
