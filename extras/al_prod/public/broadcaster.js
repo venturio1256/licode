@@ -15,15 +15,19 @@ function startBroadcasting (){
 // TODO: Publish / Unpublish stream in the room
 	  localStream.play("myVideo",{speaker: false});
 	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
-      room.startRecording(localStream, function(id) {
-        recording = true;
-        recordingId = id;
-      });
+      if (!recordding){
+		room.startRecording(localStream, function(id) {
+			recording = true;
+			recordingId = id;
+		});
+	  }
       broadcasting = true;
     }else{
 //      room.stopBroadcasting(localStream);
-      room.stopRecording(recordingId);
-	  recording = false;
+		if (recording){
+			room.stopRecording(recordingId);
+			recording = false;
+			}
 	  localStream.stop();
 	  document.getElementById("broadcastButton").innerHTML = "Resume Broadcasting";
       broadcasting = false;
