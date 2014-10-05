@@ -13,21 +13,27 @@ function startBroadcasting (){
     if (!broadcasting){
 //      room.startBroadcasting(localStream);
 // TODO: Publish / Unpublish stream in the room
-	  localStream.play("myVideo",{speaker: false});
+	  localStream.play("myVideo",{speaker: true});
 	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
       if (!recording){
 		room.startRecording(localStream, function(id) {
 			recording = true;
 			recordingId = id;
+		}, function(err){
+			console.log("error streaming ",err);
 		});
 	  }
       broadcasting = true;
     }else{
 //      room.stopBroadcasting(localStream);
 		if (recording){
-			room.stopRecording(recordingId);
-			recording = false;
-			}
+			room.startRecording(recordingId, function(id) {
+				recording = true;
+				recordingId = id;
+			}, function(err){
+				console.log("error streaming ",err);
+			});
+		}
 	  localStream.stop();
 	  document.getElementById("broadcastButton").innerHTML = "Resume Broadcasting";
       broadcasting = false;
