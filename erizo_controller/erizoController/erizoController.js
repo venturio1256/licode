@@ -537,10 +537,10 @@ var listen = function () {
 
             if (GLOBAL.config.erizoController.recording_path) {
 //                url = GLOBAL.config.erizoController.recording_path + recordingId + '.mkv';
-                url = GLOBAL.config.erizoController.recording_path + 'livestream';
+                url = GLOBAL.config.erizoController.recording_path + 'livestream.mkv';
             } else {
 //                url = '/tmp/' + recordingId + '.mkv';
-                url = '/tmp/' + 'livestream';
+                url = '/tmp/' + 'livestream' + '.mkv';
             }
 
             log.info("erizoController.js: Starting recorder streamID " + streamId + "url ", url);
@@ -569,9 +569,12 @@ var listen = function () {
             var url;
 
             if (GLOBAL.config.erizoController.recording_path) {
-                url = GLOBAL.config.erizoController.recording_path + recordingId + '.mkv';
+//                url = GLOBAL.config.erizoController.recording_path + recordingId + '.mkv';
+                url = GLOBAL.config.erizoController.recording_path + 'livestream.mkv';
+
             } else {
-                url = '/tmp/' + recordingId + '.mkv';
+//                url = '/tmp/' + recordingId + '.mkv';
+                url = '/tmp/' + 'livestream' + '.mkv';
             }
 
             log.info("erizoController.js: Stoping recording  " + recordingId + " url " + url);
