@@ -1,0 +1,65 @@
+.grid-calendar {
+    margin-bottom: 20px;
+    margin-top: 40px;
+    
+        ul {
+                    li {
+                        margin-bottom: 20px;                        
+                                    
+                                    .grid-calendar-image {
+                                        position: relative;
+                                        
+                                                        .date {
+                                                            position: absolute;
+                                                            bottom: 30px;
+                                                            left: 30px;
+                                                                                .day {
+                                                                                    color: $white;
+                                                                                    display: block;
+                                                                                    text-transform: uppercase;
+                                                                                    @include font-size(28);
+                                                                                }
+                                                                                
+                                                                                .time {
+                                                                                    color: #d2d2d2;
+                                                                                    display: block;
+                                                                                }
+                                                        }
+                                    }
+                                    
+                                    .grid-calendar-content {
+                                        background-color: $tertiary-bg-color;
+                                        padding: 30px;
+                                        margin-bottom: 1px;
+                                                        h2 {
+                                                            color: $white;
+                                                            font-weight: bold;
+                                                            margin-bottom: 10px;
+                                                            @include font-size(18);
+                                                            @include line-height(22);
+                                                        }
+                                                        
+                                                        p {
+                                                            margin-bottom: 0;
+                                                        }
+                                    }
+                                    
+                                    .grid-calendar-streams {
+                                        background: $primary-bg-color;
+                                        padding: 20px 30px;
+                                        
+                                                        img {
+                                                            @include circle;
+                                                        }
+                                                        
+                                                        a {
+                                                            margin-right: 4px;
+                                                                    }
+
+                                                        .icon-new-stream-light {
+                                                            margin-right: 8px;
+                                                        }
+                                    }
+                    }
+        }
+}
