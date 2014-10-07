@@ -13,7 +13,7 @@ function startStreaming (){
     if (!streaming){
 //      room.startStreaming(remoteStream);
 // TODO: Subscribe / Unsubscribe stream in the room
-	  remoteStream.play("theVideo",{speaker: false});
+	  remoteStream.play("theVideo",{speaker: true});
 	  document.getElementById("streamButton").innerHTML = "Suspend Streaming";
       streaming = true;
     }else{
