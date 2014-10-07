@@ -92,13 +92,14 @@ window.onload = function () {
 
     localStream.addEventListener("access-accepted", function () {
       var subscribeToStreams = function (streams) {
-        for (var index in streams) {
+/*        for (var index in streams) {
           var stream = streams[index];
 		  console.log
           if (localStream.getID() !== stream.getID()) {
 			console.log('Stream List ' + stream.getID());
-//            room.subscribe(stream);
-          }
+            room.subscribe(stream);
+*/
+			}
         }
       };
 
