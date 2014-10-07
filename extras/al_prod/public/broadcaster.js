@@ -136,7 +136,7 @@ window.onload = function () {
 
       room.connect();
 
-      localStream.play("myVideo",{speaker: false});
+      localStream.play("myVideo",{speaker: true});
 	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
 	  broadcasting = true;
 
