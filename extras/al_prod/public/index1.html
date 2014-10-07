@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Astronomy Live Basic Live Demo v0.8</title>
+    <script type="text/javascript" src="erizo.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+	<script>
+	function newDoc(doc) {
+		window.location.assign("http://104.131.192.59:3001/"+doc)
+	}
+	</script>
+	<style>
+	.sideBar {
+		position: absolute;
+		left: 900px;
+		top: 50px;
+	}
+	</style>
+  </head>
+
+  <body>
+	<main>
+		<header>
+		<h1>Astronomy Live Basic Live Demo v0.9</h1>
+		<ul style="list-style-type:disc">
+			<li>Watch solar eclipses, comets and other events in real-time</li>
+			<li>Access to live broadcasting telescopes all over the world</li>
+			<li>Connect your own telescope and stream live to thousands</li>
+			<li>Enter your email now and watch streams before we launch</li>
+		</ul>		
+		</header>
+		
+		<div id="myVideo">
+			<iframe width="854" height="510" src="//www.youtube.com/embed/HEheh1BH34Q" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div>
+		<button id="broadcastButton" onclick="newDoc('broadcaster.html')">I am a Broadcaster!</button>
+<!--		<button id="directorButton" onclick="newDoc('director.html')">I am a Director!</button>     -->
+		<button id="viewerButton" onclick="newDoc('viewer.html')">I am a Viewer!</button>
+		</div>
+	</main>
+	
+	<aside class="sideBar">
+		<h3>Events</h3>
+		<h5>Upcoming events 3rd quarter 2014</h5>
+		<div id="events"></div>
+		<button id="eventsButton" onclick="roomList()">Update list</button>
+	</aside>
+
+  </body>
+</html>
+
