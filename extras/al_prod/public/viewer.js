@@ -82,7 +82,7 @@ window.onload = function () {
 		  console.log
 //          if (localStream.getID() !== stream.getID()) {
 			console.log('Stream List ' + stream.getID());
-            room.subscribe(stream, {audio: false, video: true});
+            room.subscribe(stream, {audio: true, video: true});
 //          }
         }
       };
