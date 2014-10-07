@@ -92,13 +92,12 @@ window.onload = function () {
 
     localStream.addEventListener("access-accepted", function () {
       var subscribeToStreams = function (streams) {
-/*        for (var index in streams) {
+        for (var index in streams) {
           var stream = streams[index];
 		  console.log
           if (localStream.getID() !== stream.getID()) {
 			console.log('Stream List ' + stream.getID());
-            room.subscribe(stream);
-*/
+//            room.subscribe(stream);
 			}
         }
       };
@@ -106,7 +105,7 @@ window.onload = function () {
       room.addEventListener("room-connected", function (roomEvent) {
 
         room.publish(localStream, {maxVideoBW: 600});
-        subscribeToStreams(roomEvent.streams);
+//        subscribeToStreams(roomEvent.streams);
       });
 
       room.addEventListener("stream-subscribed", function(streamEvent) {
@@ -123,7 +122,7 @@ window.onload = function () {
       room.addEventListener("stream-added", function (streamEvent) {
         var streams = [];
         streams.push(streamEvent.stream);
-        subscribeToStreams(streams);
+//        subscribeToStreams(streams);
       });
 
       room.addEventListener("stream-removed", function (streamEvent) {
