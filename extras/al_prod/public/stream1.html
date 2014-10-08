@@ -30,11 +30,11 @@
         <!-- Header -->
         <header class="main-header">
             <div class="logo"><a href="index.html">AstronomyLive</a></div> <!-- end logo -->
-            <h2>Broadcaster</h2>
+            <h2>Aurora Borealis</h2>
             <nav class="main-navigation">
                 <ul class="list-unstyled">
                     <li>
-                        <a href="broadcast.html" class="broadcast"><i class="icon-broadcast-small"></i>Broadcast</a>
+                        <a href="broadcaster.html" class="broadcast"><i class="icon-broadcast-small"></i>Broadcast</a>
                     </li>
                 </ul>
             </nav> <!-- end main-navigation -->
@@ -43,13 +43,17 @@
         <!-- Stream -->
         <div class="main-stream bg-dark">
             <div class="container">
-                <div  class="row">
-
-                    <div class="col-sm-12">
-                        <video id="myVideo" autoplay loop preload poster="assets/_tmp/img_03.jpg" class="img img-responsive">
+                <div class="row">
+                    <div class="col-sm-12" style="width: 1280px; height: 720px; position: ;">
+                        <video id="theVideo" autoplay loop preload poster="assets/_tmp/video.jpg" class="img img-responsive">
                         </video>
-					</div>
-				</div>
+                        <!--[if lt IE 9]>
+                        <script>
+                        document.createElement('video');
+                        </script>
+                        <![endif]-->
+                    </div>
+                </div>
             </div>
         </div> <!-- end main-stream -->
         
@@ -74,6 +78,6 @@
         <script src="assets/js/bootstrap.js"></script>
         <script src="assets/js/retina.js"></script>
         <script src="erizo.js"></script>
-        <script src="broadcast.js"></script>
+        <script src="stream.js"></script>
     </body>
 </html>

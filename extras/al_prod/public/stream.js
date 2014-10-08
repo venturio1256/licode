@@ -100,12 +100,18 @@ window.onload = function () {
       });
 
       room.addEventListener("stream-subscribed", function(streamEvent) {
-		var parent = document.getElementById("theVideo");
+/*		var parent = document.getElementById("theVideo");
 		var child = document.getElementById("thePoster");
 		parent.removeChild(child);
-        var stream = streamEvent.stream;
+
+        var stream = streamEvent.stream;		
 		stream.play("theVideo",{speaker: true});
-      });
+*/
+		var myURL = window.URL || webkitURL;
+		var stream_url = myURL.createObjectURL(streamEvent.stream.stream);
+		document.getElementById("theVideo").src = stream_url;
+
+		});
 
       room.addEventListener("stream-added", function (streamEvent) {
         var streams = [];
