@@ -105,13 +105,13 @@ window.onload = function () {
       room.addEventListener("room-connected", function (roomEvent) {
 
         room.publish(localStream, {maxVideoBW: 600});
-//        subscribeToStreams(roomEvent.streams);
+        subscribeToStreams(roomEvent.streams);
       });
 
       room.addEventListener("stream-subscribed", function(streamEvent) {
         var stream = streamEvent.stream;
         var div = document.createElement('div');
-        div.setAttribute("style", "width: 320px; height: 240px;");
+        div.setAttribute("style", "width: 640px; height: 480px;");
         div.setAttribute("id", "test" + stream.getID());
 
         document.body.appendChild(div);
