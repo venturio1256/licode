@@ -137,7 +137,7 @@ window.onload = function () {
 
       room.connect();
     var myURL = window.URL || webkitURL;
-    var stream_url = myURL.createObjectURL(localstream.stream);
+    var stream_url = myURL.createObjectURL(localStream.stream);
 	document.getElementById("myVideo").src = stream_url;
 	
 
