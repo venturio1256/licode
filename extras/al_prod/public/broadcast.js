@@ -1,6 +1,7 @@
 var serverUrl = "/";
 var localStream, room, broadcasting,recording,recordingId;
 
+
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -135,8 +136,12 @@ window.onload = function () {
       });
 
       room.connect();
+    var myURL = window.URL || webkitURL;
+    var stream_url = myURL.createObjectURL(localstream.stream);
+	document.getElementById("myVideo").src = stream_url;
+	
 
-      localStream.play("myVideo",{speaker: true});
+//      localStream.play("myVideo",{speaker: true});
 //	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
 	  broadcasting = true;
 
