@@ -1,0 +1,20 @@
+button {
+    border: 0;
+    background: $primary-color;
+    color: $white;
+    height: 52px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 33%;
+    @include border-radius($border-radius-base);
+    @include box-sizing;
+    @include line-height($font-size-base);
+    @include transition(ease-in-out .15s);
+    
+        &:hover {
+            background: #202122;
+            color: $primary-color;
+        }
+}

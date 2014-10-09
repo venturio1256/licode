@@ -1,0 +1,45 @@
+//== Colors
+$white:                     #fefefe;
+$black:                     #000;
+
+$primary-bg-color:          #1b1b1d;
+$secondary-bg-color:        #141415;
+$tertiary-bg-color:         #202122;
+$quartiary-bg-color:        #292a2c;
+
+$primary-color:             #17b793;
+$secondary-color:           #46474a;
+$tertiary-color:            #adaeb0;
+
+$text-primary-color:        #5a5b5d;
+$text-secondary-color:      #6e7173;
+
+$header-primary-color:      $white;
+$header-secondary-color:    #8b8d8f;
+
+$link-color:                $tertiary-color;
+$link-hover-color:          $primary-color;
+
+$border-color:              #2b2b2d;
+
+//== Typography
+$font-family-base-text:     "proxima-nova", Arial, sans-serif;
+$font-family-sans-serif:    "proxima-nova", Arial, sans-serif;
+
+$font-size-base:            16;
+$font-size-large:           20;
+$font-size-small:           13;
+
+$font-size-h1:              48;
+$font-size-h2:              30;
+$font-size-h3:              24;
+$font-size-h4:              20;
+$font-size-h5:              $font-size-base;
+$font-size-h6:              $font-size-base;
+
+$line-height-base:          24;
+
+//== Border Radius
+$border-radius-base:        4;
+$border-radius-large:       8;
+$border-radius-small:       2;

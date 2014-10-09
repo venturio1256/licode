@@ -1,52 +1,116 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Astronomy Live Basic Live Demo v0.8</title>
-    <script type="text/javascript" src="erizo.js"></script>
-    <script type="text/javascript" src="main.js"></script>
-	<script>
-	function newDoc(doc) {
-		window.location.assign("http://104.131.192.59:3001/"+doc)
-	}
-	</script>
-	<style>
-	.sideBar {
-		position: absolute;
-		left: 900px;
-		top: 50px;
-	}
-	</style>
-  </head>
+<html lang="nl">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-  <body>
-	<main>
-		<header>
-		<h1>Astronomy Live Basic Live Demo v0.9</h1>
-		<ul style="list-style-type:disc">
-			<li>Watch solar eclipses, comets and other events in real-time</li>
-			<li>Access to live broadcasting telescopes all over the world</li>
-			<li>Connect your own telescope and stream live to thousands</li>
-			<li>Enter your email now and watch streams before we launch</li>
-		</ul>		
-		</header>
-		
-		<div id="myVideo">
-			<iframe width="854" height="510" src="//www.youtube.com/embed/HEheh1BH34Q" frameborder="0" allowfullscreen></iframe>
-		</div>
-		<div>
-		<button id="broadcastButton" onclick="newDoc('broadcaster.html')">I am a Broadcaster!</button>
-<!--		<button id="directorButton" onclick="newDoc('director.html')">I am a Director!</button>     -->
-		<button id="viewerButton" onclick="newDoc('viewer.html')">I am a Viewer!</button>
-		</div>
-	</main>
-	
-	<aside class="sideBar">
-		<h3>Events</h3>
-		<h5>Upcoming events 3rd quarter 2014</h5>
-		<div id="events"></div>
-		<button id="eventsButton" onclick="roomList()">Update list</button>
-	</aside>
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-  </body>
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="assets/css/grid.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <!-- Fonts -->
+        <script type="text/javascript" src="//use.typekit.net/hhv2luz.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+        <!-- Favicon and Apple Icons -->
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+    </head>
+    <body>
+        
+        <!-- Header -->
+        <header class="main-header">
+            <div class="logo"><a href="http://webcast.astronomylive.net">AstronomyLive</a></div> <!-- end logo -->
+            <h2>All Streams</h2>
+            <nav class="main-navigation">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="broadcast.html" class="broadcast" ><i class="icon-broadcast-small"></i>Broadcast</a>
+                    </li>
+                </ul>
+            </nav> <!-- end main-navigation -->
+        </header> <!-- end main-header -->        
+        
+        <div class="wrapper">
+            <div class="bg-dark">
+                <!-- Main content -->
+                <div class="main-content container">
+                            <div class="form">
+                                <form accept-charset="utf-8" action="https://app.getresponse.com/add_contact_webform.html?u=lqlF" method="post">
+                                    <input type="text" id="name" name="name" placeholder="What’s your first name?">
+                                    <input type="text" id="email" name="email" placeholder="Your best email address?">
+                                    <button type="submit" name="submit">Tell me about new events</button> 
+                                    <input type="hidden" name="webform_id" value="4596602" />
+                                </form>
+                                <script type="text/javascript" src="http://app.getresponse.com/view_webform.js?wid=4596602&mg_param1=1&u=lqlF"></script>
+                            </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="grid-calendar">                                
+                                <ul class="list-unstyled row">
+                                    <li class="col-sm-4">
+                                        <header class="grid-calendar-image">
+                                            <div class="date">
+                                                <span class="day">Wed</span>
+                                                <span class="time">8:17 - 13:32 UT</span>
+                                            </div>
+                                            <img src="assets/_tmp/event-1.jpg" alt="" class="img-responsive" onclick="newDoc('stream.html')">
+                                        </header>
+                                        <div class="grid-calendar-content">
+                                            <a href="stream.html"><h2>Total Lunar Eclipse</h2></a>
+                                            <p>October 8th 2014, the day of the second total lunar eclipse in the year 2014 and the first live stream on AstronomyLive! During a lunar eclipse, the moon enters the earth's shadow. It won't disappear; but the 'normal' color of the moon will turn into a more reddish hue.
+											Livestream from Washburn Observatory in Wisconsin, brought to you by Mister Mosby. The observatory is located at Wisconsin-Madison University.</p>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <header class="grid-calendar-image">
+                                            <div class="date">                                            
+                                                <span class="day">Mon</span>
+                                                <span class="time">All day</span>
+                                            </div>
+                                            <img src="assets/_tmp/event-2.jpg" alt="" class="img-responsive">
+                                        </header>
+                                        <div class="grid-calendar-content">
+                                            <h2>Orionids Meteor Shower</h2>
+                                            <p>Comet Halley can be blamed for this meteor shower. Every meteor that's part of the orionid meteor shower is one small piece of this comet. Circling the Sun every 76 years, comet Halley refreshes his dirt path fairly regularly.</p>
+                                        </div>
+                                    </li>
+                                    <li class="col-sm-4">
+                                        <header class="grid-calendar-image">
+                                            <div class="date">                                            
+                                                <span class="day">Fri</span>
+                                                <span class="time">19:38 - 23:52 UT</span>
+                                            </div>
+                                            <img src="assets/_tmp/event-3.jpg" alt="" class="img-responsive">
+                                        </header>
+                                        <div class="grid-calendar-content">
+                                            <h2>Partial Solar Eclipse</h2>
+                                            <p>This partial solar eclipse starts in Eastern Russia and across the Bering sea in Alaska at 19.38 UT. The most interesting part - the maximum eclipse - will take place at 21:44:31 UT in Canada's Nunavut Territory near Prince of Wales Island.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> <!-- end grid-calendar -->
+                        </div>
+                    </div>
+                </div> <!-- end main-content -->
+            </div>
+        </div> <!-- end wrapper -->
+
+        <!-- JavaScript -->
+        <script src="assets/js/vendor/jquery-2.0.3.min.js"></script>
+        <script src="assets/js/vendor/modernizr.custom.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/retina.js"></script>
+        <script src="assets/js/script.js"></script>
+    </body>
 </html>
-

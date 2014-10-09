@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Astronomy Live Basic Live Demo v0.8</title>
+    <script type="text/javascript" src="erizo.js"></script>
+	<style>
+	.sideBar {
+		position: absolute;
+		left: 900px;
+		top: 50px;
+	}
+	.main {
+		width: 800px;
+		height: 500px;
+	}
+	</style>
+  </head>
+
+  <body>
+	<main>
+		<header>
+		<h1>Astronomy Live Basic Live Demo v0.8</h1>
+		<h3>In this section you will be able to:</h3>
+		<ul style="list-style-type:disc">
+			<li>Manage the events</li>
+			<li>Access and control the live events</li>
+			<li>Manage broadcasters and viewers</li>
+		</ul>		
+		</header>
+		<div class = "main">
+
+			<h5>Create an Event</h5>
+				Event Name:
+				<input type="text" id="eventName" name="eventName" placeholder="myEvent"><br>
+				Date:
+				<input type="date" id="eventDate" name="eventDate" min="2014-08-31"><br>
+				<textarea id="eventDescr" rows="10" cols="30" placeholder="Enter description of the event"></textarea>
+				<button id="btnEvent" onclick="createEvent(this.button)">Create it!</button>
+			<p id="eventId"></p>
+		</div>
+		
+		<div>
+		<button id="createEventButton" onclick="createEvent()">Create an Event</button>
+		<button id="accessEventButton" onclick="manageEvent()">Manage Events</button>
+		<button id="accessActivityButton" onclick="manageActivity">Manage Event's Activity</button>
+		</div>
+	</main>
+	
+	<aside class="sideBar">
+		<h3>Events</h3>
+		<h5>Upcoming events 3rd quarter 2014</h5>
+		<div id="events"></div>
+		<button id="eventsButton" onclick="roomList()">Update list</button>
+	</aside>
+    <script type="text/javascript" src="director.js"></script>
+
+  </body>
+</html>
+

@@ -1,0 +1,28 @@
+.main-stream {
+
+}
+
+.main-content {
+
+}
+
+.comment-list {
+        li {
+            color: #727476;
+            padding: 40px;
+            
+                    &:nth-child(odd) {
+                        background: #272729;
+                    }
+                    
+                    h5 {
+                        color: #8b8d8f;
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .date {
+                        color: #5a5b5d;
+                    }
+        }
+}   

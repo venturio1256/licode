@@ -1,0 +1,73 @@
+.main-footer {
+    padding: 35px 0px; 
+    
+    .main-footer-navigation {
+                        ul {
+                                            li {                                                
+                                                @include inline-block;
+                                                
+                                                                &:last-child {
+                                                                    padding-right: 0 !important;
+                                                                }
+                                                
+                                                                a {
+                                                                    color: $secondary-color;
+                                                                    text-decoration: none;
+                                                                    
+                                                                                        &:hover {
+                                                                                            color: $tertiary-color;
+                                                                                        }
+                                                                }
+                                            }
+                        }
+        
+        .main-footer-navigation-primary {
+            font-weight: bold;
+            
+                                            li {
+                                                padding-right: 30px;
+                                            }
+        }
+        
+        .main-footer-navigation-secondary {
+            @include font-size(14);
+                                            li {
+                                                padding-right: 27px;
+                                            }           
+        }
+    }
+    
+    .main-footer-social-links {
+        text-align: right;
+        @include line-height(44);
+        
+                ul {
+                                li {
+                                    padding-left: 26px;
+                                    @include inline-block;
+                                    
+                                                    &:first-child {
+                                                        padding-left: 0;
+                                                    }
+                                }
+                }
+                
+        a:hover {
+                        .social-facebook {
+                            @include retina('../img/icon-social-facebook-green','png',11,20);
+                        }
+                        
+                        .social-twitter {
+                            @include retina('../img/icon-social-twitter-green','png',20,17);
+                        }
+                        
+                        .social-google {
+                            @include retina('../img/icon-social-google-green','png',20,20);
+                        }
+                        
+                        .social-instagram {
+                            @include retina('../img/icon-social-instagram-green','png',20,20);
+                        }
+        }
+    }
+}

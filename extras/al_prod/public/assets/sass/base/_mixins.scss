@@ -1,0 +1,182 @@
+@mixin border-radius($radius) {
+    -webkit-border-radius: unquote($radius + 'px');
+            border-radius: unquote($radius + 'px');
+    background-clip: padding-box;
+}
+
+@mixin border-top-radius($radius) {
+    -webkit-border-top-right-radius: unquote($radius + 'px');
+            border-top-right-radius: unquote($radius + 'px');
+    -webkit-border-top-left-radius: unquote($radius + 'px');
+            border-top-left-radius: unquote($radius + 'px');
+    background-clip: padding-box;
+}
+@mixin border-right-radius($radius) {
+    -webkit-border-bottom-right-radius: unquote($radius + 'px');
+            border-bottom-right-radius: unquote($radius + 'px');
+    -webkit-border-top-right-radius: unquote($radius + 'px');
+            border-top-right-radius: unquote($radius + 'px');
+    background-clip: padding-box;
+}
+@mixin border-bottom-radius($radius) {
+    -webkit-border-bottom-right-radius: unquote($radius + 'px');
+            border-bottom-right-radius: unquote($radius + 'px');
+    -webkit-border-bottom-left-radius: unquote($radius + 'px');
+            border-bottom-left-radius: unquote($radius + 'px');
+    background-clip: padding-box;
+}
+@mixin border-left-radius($radius) {
+    -webkit-border-bottom-left-radius: unquote($radius + 'px');
+            border-bottom-left-radius: unquote($radius + 'px');
+    -webkit-border-top-left-radius: unquote($radius + 'px');
+            border-top-left-radius: unquote($radius + 'px');
+    background-clip: padding-box;
+}
+
+@mixin box-sizing($box-model: border-box) {
+    -webkit-box-sizing: $box-model;
+       -moz-box-sizing: $box-model; 
+            box-sizing: $box-model;
+}
+
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+          box-shadow: $shadow;
+}
+
+/* Usage
+    @include breakpoint(name) {}
+*/
+@mixin breakpoint($point) {
+    @if $point == desktop {
+        @media (min-width: 992px) { @content; }
+    }
+    @else if $point == tablet {
+        @media (min-width: 768px) and (max-width: 991px) { @content; }
+    }
+    @else if $point == mobile {
+        @media (max-width: 768px)  { @content; }
+    }
+}
+
+@mixin center() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin circle {
+    -webkit-border-radius: 50em;
+            border-radius: 50em;
+    background-clip: padding-box;
+}
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin font-size($sizeValue: 14 ){
+    font-size: $sizeValue + px;
+    font-size: (0.1 * $sizeValue) + rem;
+}
+
+@mixin form-control-focus($color: $primary-color) {
+  $color-rgba: rgba(red($color), green($color), blue($color), .6);
+  &:focus {
+    border-color: $color;
+    outline: 0;
+  }
+}
+
+@mixin gradient($fromColor, $toColor) {
+    background-color: $toColor;
+    background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor));
+    background-image: -webkit-linear-gradient(top, $fromColor, $toColor);
+    background-image:    -moz-linear-gradient(top, $fromColor, $toColor);
+    background-image:     -ms-linear-gradient(top, $fromColor, $toColor);
+    background-image:      -o-linear-gradient(top, $fromColor, $toColor);
+    background-image:         linear-gradient(top, $fromColor, $toColor);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
+}
+
+@mixin inline-block {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle;
+}
+
+@mixin line-height($heightValue: 20 ){
+    line-height: $heightValue + px;
+    line-height: (0.1 * $heightValue) + rem;
+}
+
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie);
+}
+
+@mixin placeholder($color: $text-secondary-color) {
+  &::-moz-placeholder           { color: $color;
+                                  opacity: 1;
+                                   }
+  &:-ms-input-placeholder       { color: $color;
+                                   }
+  &::-webkit-input-placeholder  { color: $color;
+                                   }
+}
+
+@mixin retina($image, $type, $width, $height) {
+    background-image: url($image + '.' + $type);
+    @media (min--moz-device-pixel-ratio: 1.3),
+           (-o-min-device-pixel-ratio: 2.6/2),
+           (-webkit-min-device-pixel-ratio: 1.3),
+           (min-device-pixel-ratio: 1.3),
+           (min-resolution: 1.3dppx) {
+        background-image: url($image + '@2x.' + $type);
+        -webkit-background-size: unquote($width + 'px ' + $height + 'px');
+                background-size: unquote($width + 'px ' + $height + 'px');
+    }
+}
+
+@mixin round() {
+    border-radius: 50em;
+}
+
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+    text-shadow: $x $y $blur $color;
+}
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+          transition: $transition;
+}
+@mixin transition-property($transition-property...) {
+  -webkit-transition-property: $transition-property;
+          transition-property: $transition-property;
+}
+@mixin transition-delay($transition-delay) {
+  -webkit-transition-delay: $transition-delay;
+          transition-delay: $transition-delay;
+}
+@mixin transition-duration($transition-duration...) {
+  -webkit-transition-duration: $transition-duration;
+          transition-duration: $transition-duration;
+}
+@mixin transition-transform($transition...) {
+  -webkit-transition: -webkit-transform $transition;
+     -moz-transition: -moz-transform $transition;
+       -o-transition: -o-transform $transition;
+          transition: transform $transition;
+}

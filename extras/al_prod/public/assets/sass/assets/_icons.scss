@@ -1,0 +1,57 @@
+.icon-broadcast-small,
+.icon-new-stream-dark,
+.icon-new-stream-light {
+    position: relative;
+    @include inline-block;
+}
+
+.icon-broadcast-small {
+    @include retina('../img/icon-broadcast-grey-small','png',24,19);
+    width: 24px;
+    height: 19px;
+}
+
+.icon-new-stream-dark {
+    @include retina('../img/icon-new-broadcast-dark','png',36,36);
+    width: 36px;
+    height: 36px;    
+}
+
+.icon-new-stream-light {
+    @include retina('../img/icon-new-broadcast-light','png',36,36);
+    width: 36px;
+    height: 36px;    
+}
+
+// Social icons
+.social-facebook,
+.social-twitter,
+.social-google,
+.social-instagram {
+    position: relative;
+    @include inline-block;    
+}
+
+.social-facebook {
+    @include retina('../img/icon-social-facebook','png',11,20);
+    width: 11px;
+    height: 20px;
+}
+
+.social-twitter {
+    @include retina('../img/icon-social-twitter','png',20,17);
+    width: 20px;
+    height: 17px;
+}
+
+.social-google {
+    @include retina('../img/icon-social-google','png',20,20);
+    width: 20px;
+    height: 20px;
+}
+
+.social-instagram {
+    @include retina('../img/icon-social-instagram','png',20,20);
+    width: 20px;
+    height: 20px;
+}

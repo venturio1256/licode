@@ -1,0 +1,25 @@
+.arrow-down-grey,
+.arrow-left-grey,
+.arrow-right-grey{
+    position: relative;
+    vertical-align: middle;
+    @include inline-block;
+}
+
+.arrow-down-grey {
+    @include retina('../img/arrow-down-grey','png',10,7);
+    width: 10px;
+    height: 7px;
+}
+
+.arrow-left-grey {
+    @include retina('../img/arrow-left-grey','png',6,9);
+    width: 6px;
+    height: 9px;    
+}
+
+.arrow-right-grey {
+    @include retina('../img/arrow-right-grey','png',6,9);
+    width: 6px;
+    height: 9px;    
+}

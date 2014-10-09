@@ -1,5 +1,5 @@
 var serverUrl = "/";
-var localStream, room, broadcasting;
+var localStream, room, broadcasting,recording,recordingId;
 
 function getParameterByName(name) {
   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -13,13 +13,27 @@ function startBroadcasting (){
     if (!broadcasting){
 //      room.startBroadcasting(localStream);
 // TODO: Publish / Unpublish stream in the room
-	  localStream.play("myVideo",{speaker: false});
+	  localStream.play("myVideo",{speaker: true});
 	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
-      room.startRecording(localStream);
+      if (!recording){
+		room.startRecording(localStream, function(id) {
+			recording = true;
+			recordingId = id;
+		}, function(err){
+			console.log("error streaming ",err);
+		});
+	  }
       broadcasting = true;
     }else{
 //      room.stopBroadcasting(localStream);
-      room.stopRecording(localStream);
+		if (recording){
+			room.startRecording(recordingId, function(id) {
+				recording = true;
+				recordingId = id;
+			}, function(err){
+				console.log("error streaming ",err);
+			});
+		}
 	  localStream.stop();
 	  document.getElementById("broadcastButton").innerHTML = "Resume Broadcasting";
       broadcasting = false;
@@ -27,17 +41,6 @@ function startBroadcasting (){
   }
 }
 
-function startRecording (){
-  if (room!=undefined){
-    if (!recording){
-      room.startRecording(localStream);
-      recording = true;
-    }else{
-      room.stopRecording(localStream);
-      recording = false;
-    }
-  }
-}
 
 function roomList() {
 
@@ -133,7 +136,7 @@ window.onload = function () {
 
       room.connect();
 
-      localStream.play("myVideo",{speaker: false});
+      localStream.play("myVideo",{speaker: true});
 	  document.getElementById("broadcastButton").innerHTML = "Suspend Broadcasting";
 	  broadcasting = true;
 

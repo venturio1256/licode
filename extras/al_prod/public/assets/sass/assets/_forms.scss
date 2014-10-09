@@ -1,0 +1,16 @@
+input,
+textarea {
+    background: rgba(0,0,0,.4);
+    border: 1px solid $border-color;
+    color: $white;
+    height: 56px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 33%;
+    @include border-radius($border-radius-base);
+    @include box-sizing;
+    @include line-height($font-size-base);
+    @include form-control-focus($text-secondary-color);
+    @include placeholder(#85878a);
+    @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+}
