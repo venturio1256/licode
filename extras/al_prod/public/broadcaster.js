@@ -27,8 +27,8 @@ function startBroadcasting (){
     }else{
 //      room.stopBroadcasting(localStream);
 		if (recording){
-			room.startRecording(recordingId, function(id) {
-				recording = true;
+			room.stopRecording(recordingId, function(id) {
+				recording = false;
 				recordingId = id;
 			}, function(err){
 				console.log("error streaming ",err);
