@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Astronomy Live Basic Streaming</title>
+	<link href="//vjs.zencdn.net/4.9/video-js.css" rel="stylesheet">
+	<script src="//vjs.zencdn.net/4.9/video.js"></script>
+    <script type="text/javascript" src="erizo.js"></script>
+	
+  </head>
+
+  <body>
+	<main>
+		<header>
+		<h1>Astronomy Live Basic Streaming  v0.9</h1>
+		<h3>Watch solar eclipses, comets and other events in real-time</h3>
+		</header>
+		<div>
+			<video id="example_video_1" class="video-js vjs-default-skin"
+			  preload="auto" width="640" height="480"
+			  poster="assets/_tmp/img_03.jpg"
+			  data-setup='{"controls":true}'>
+			 <source src="http://104.131.192.59:8095/live.webm" type='video/webm' />
+			 <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+			</video>		
+		</div>		
+		<button id="LeaveButton" onclick="disconnect()">Leave Event</button>
+	</main>
+	
+	<aside>
+		<h3>Events</h3>
+		<h5>Upcoming events 3rd quarter 2014</h5>
+		<div id="events"></div>
+		<button id="eventsButton" onclick="roomList()">Update list</button>
+	</aside>
+
+  </body>
+</html>
