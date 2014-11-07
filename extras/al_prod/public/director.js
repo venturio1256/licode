@@ -57,6 +57,8 @@ function manageEvent() {
 function manageActivity() {
 };
 
+/*
 window.onload = function () {
 	roomList();
 };
+*/
