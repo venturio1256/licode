@@ -101,6 +101,28 @@ app.post('/createRoom/', function(req,res) {
 	}
 });
 
+app.post('/deleteRoom/',function(req,res) {
+	'use strict';
+	var roomId = req.body.eventId;
+	console.log('Event Id',roomId);
+	if (roomId !='' && roomId != undefined) {
+		N.API.deleteRoom(roomId, function(result) {
+			console.log('Delete Result: ', result);
+			res.send(result);
+			}, function(error) {
+			console.log('Room deletion Error ', error);
+			});
+	}
+});
+
+app.get('/getRoomInfo/', function (req, res) {
+    "use strict";
+    N.API.getRoom(function (rooms) {
+        res.send(rooms);
+    });
+});
+
+
 app.get('/getRooms/', function (req, res) {
     "use strict";
     N.API.getRooms(function (rooms) {
