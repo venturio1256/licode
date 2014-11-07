@@ -10,5 +10,8 @@ scripts/libdeps/
 libdeps/
 extras/vagrant/.vagrant
 extras/vagrant/licode/
-erizo_controller/erizoAgent/out.log
-erizo_controller/erizoAgent/erizo-*.log
+erizo_controller/erizoAgent/*.log
+erizo_controller/erizoController/*.log
+extras/al_prod/*.log
+nuve/nuveAPI/*.log
+
