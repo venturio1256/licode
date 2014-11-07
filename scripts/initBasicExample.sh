@@ -9,4 +9,5 @@ CURRENT_DIR=`pwd`
 EXTRAS=$ROOT/extras
 
 cd $EXTRAS/basic_example
-node basicServer.js &
+forever start -a -m 5 -l fserver.log -o outserver.log -e errserver.log basicServer.js
+#node basicServer.js &
