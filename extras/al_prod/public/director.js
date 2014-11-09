@@ -27,13 +27,13 @@ function roomList() {
     req.send();
   };
   
-function createEvent(btn) {
+function createEvent() {
     var req = new XMLHttpRequest();
     var url = serverUrl + 'createRoom/';
-/*	var eventName = document.getElementById("eventName").value;
+	var eventName = document.getElementById("eventName").value;
 	var eventDate = document.getElementById("eventDate").value;
 	var eventDescr = document.getElementById("eventDescr").value;
-*/
+
 	var body = {eventName:eventName.value, eventDate: eventDate.value, eventDescr: eventDescr.value};
 
     req.onreadystatechange = function () {
