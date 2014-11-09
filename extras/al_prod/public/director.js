@@ -17,7 +17,7 @@ function roomList() {
         var rooms = JSON.parse(req.responseText);
 		console.log(req.responseText);
 		for (i=0; i < rooms.length; i++) {
-			document.getElementById("events").innerHTML += (i+1) + " - " + rooms[i].name + ":" + rooms[i]._id"<br>";
+			document.getElementById("events").innerHTML += (i+1) + " - " + rooms[i].name + ":" + rooms[i]._id + "<br>";
 		}
       }
     };
